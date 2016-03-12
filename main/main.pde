@@ -23,10 +23,10 @@ Table data13;
 float[] latitude = new float[7805];
 float[] longitude = new float[7805];
 String[] name = new String[7805];
-float actualWidth = 126 - 66;
-float actualHeight = 48 - 24;
+float actualWidth = 124.50 - 67.50;
+float actualHeight = 46 - 26;
 float scaleFactorW = 900/actualWidth;
-float scaleFactorH = 600/actualHeight;
+float scaleFactorH = 550/actualHeight;
 
 //=========================== SETUP() ===========================//
 
@@ -35,7 +35,7 @@ void setup()
   size(1200, 700);
   frameRate(60);
   
-  mapPic = loadImage("pics/blankUSMap.png","png");
+  mapPic = loadImage("pics/blankUSMap2.gif");
   homeIcon = loadImage("pics/homeIcon.png", "png");
   
   boolean fileExists = checkFileExists("MERGED2013_PP.csv");
@@ -47,6 +47,7 @@ void setup()
       name[i-1] = data13.getString(i, 3);
     }
   }
+  print(longitude[0], " ", latitude[0], "\n");
 }
 
 //=========================== DRAW() ============================//
@@ -86,20 +87,38 @@ void drawToolbar()
   if(overRect(0,0,50,50)&&mousePressed)
       menuOpen=!menuOpen;
   
-  noStroke();
+  stroke(0);
+  strokeWeight(2);
   noFill();
-  image(mapPic, 25, 75, 900, 600);
+  image(mapPic, 25, 75, 900, 550);
+  rect(25,75,900,600);
+  noStroke();
   image(homeIcon,1200-50,0,50,50);
   
-  noStroke();
+  plotColleges();
+ 
+  /*float scaledLat = (46.25 - latitude[346])*scaleFactorH;
+  float scaledLong = (124.25 + longitude[346])*scaleFactorW;
+  
+  print(latitude[346] + " scaledLat " + scaledLat + "\n");
+  print(longitude[346] + " scaledLong " + scaledLong + "\n");
+  
+  stroke(0);
+  strokeWeight(2);
+  noFill();
+  ellipse(scaledLong + 25, scaledLat + 75, 10, 10);
+  
+  float scaledLa = (46.25 - latitude[692])*scaleFactorH;
+  float scaledLon = (124.25 + longitude[692])*scaleFactorW;
+  
+  print(latitude[692] + " scaledLat " + scaledLa + "\n");
+  print(longitude[692] + " scaledLong " + scaledLon + "\n");
+  
+  stroke(0);
+  strokeWeight(2);
   fill(255,0,0);
-  float scaledLat = latitude[0]*scaleFactorW;
-  float scaledLong = longitude[0]*scaleFactorH*(-1);
-  
-  print(scaleFactorW + " " + latitude[0] + " scaledLat " + scaledLat + "\n");
-  print(longitude[0] + " scaledLong " + scaledLong + "\n");
-  
-  ellipse(scaledLat + 25, scaledLong + 75, 10, 10);
+  ellipse(scaledLon + 25, scaledLa + 75, 10, 10);
+  ellipse(800,165, 20,20);*/
   
 }
 
@@ -122,6 +141,24 @@ boolean checkFileExists(String path) {
   if (file.exists()) 
     return true;
   else return false;
+}
+
+//======================= plotColleges() ========================//
+
+void plotColleges() {
+ 
+  for(int i = 0; i < 400; i++) {
+  
+    float scaledLat = (46 - latitude[i])*scaleFactorH;
+    float scaledLong = (124.50 + longitude[i])*scaleFactorW;
+    
+    //print(latitude[i] + " scaledLat " + scaledLat + "\n");
+    //print(longitude[i] + " scaledLong " + scaledLong + "\n");
+    
+    noStroke();
+    fill(255,0,0);
+    ellipse(scaledLong + 25, scaledLat + 75, 10, 10);
+  }
 }
 
 //===============================================================//
