@@ -9,8 +9,8 @@ void drawStateView(float[] data, int min, int max)
   strokeWeight(1);
   noFill();
   rect(25,75,465,600);
-  float stateData[] = new float[100];
-  String names[]= new String[100];
+  float stateData[] = new float[csvSize];
+  String names[]= new String[csvSize];
   int j=0;
   for(int i=0; i<csvSize-1; i++)
   {
