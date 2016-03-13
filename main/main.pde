@@ -20,10 +20,10 @@ PImage mapPic, homeIcon, statePic;
 boolean menuOpen=false;
 
 
-boolean homeView=false;
+boolean homeView=true;
 
 
-boolean stateView=true;
+boolean stateView=false;
 int currentState=0;
 BarChart barChart;
 int currAttr = 0;
