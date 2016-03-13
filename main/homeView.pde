@@ -1,5 +1,6 @@
 //=========================== drawStates() ======================//
 
+
 void drawHomeView()
 { 
   int squareSize=100;
