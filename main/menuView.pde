@@ -31,6 +31,7 @@ void drawMenuView()
     menuOpen=false;
     stateView=false;
     homeView=true;
+    collegeView = false;
   }
 //----------------------stateview bar
   noStroke();
@@ -53,6 +54,30 @@ void drawMenuView()
     menuOpen=false;
     homeView=false;
     stateView=true;
+    collegeView = false;
+  }
+//----------------------collegeview bar
+  noStroke();
+  fill(13,71,161);
+  if(collegeView)
+  {
+    fill(21,101,192);
+    stroke(255);
+    strokeWeight(2);
+  }
+  rect(0,55+60,300,30);
+  noStroke();
+  fill(255);
+  textFont(createFont("Serif",18),18);
+  textAlign(LEFT, CENTER);
+  textSize(10);
+  text(currColNames[currCollege], 10, 55+60+15);
+  if(mouseOver(0,55+60,300,30)&&mousePressed)
+  {
+    menuOpen=false;
+    homeView=false;
+    stateView=false;
+    collegeView = true;
   }
 //----------------------
 }// end draw Menu View

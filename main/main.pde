@@ -19,9 +19,10 @@ PImage mapPic, homeIcon, statePic;
 
 boolean menuOpen=false;
 
+boolean collegeView = false;
+int currCollege = 0;
 
 boolean homeView=true;
-
 
 boolean stateView=false;
 int currentState=0;
@@ -30,7 +31,7 @@ int currAttr = 0;
 
 
 Table data13;
-int csvSize=500;
+int csvSize=7805;
 float[] latitude = new float[csvSize];
 float[] longitude = new float[csvSize];
 String[] collegeName = new String[csvSize];
@@ -46,6 +47,49 @@ float[] actWrit = new float[csvSize];
 float[] satMath = new float[csvSize];
 float[] satRead = new float[csvSize];
 float[] satWrit = new float[csvSize];
+
+String[] currColNames;
+float[] currColWhit;
+float[] currColBl;
+float[] currColHisp;
+float[] currColAsian;
+float[] currColAmIn;
+float[] currColHI;
+float[] currCol2More;
+float[] currColAlien;
+float[] currColUnk;
+float[] retRate4f;
+float[] retRate4p;
+float[] retRateL4f;
+float[] retRateL4p;
+float[] middSchool;
+float[] highSchool;
+float[] postSecond;
+float[] totDebt;
+float[] firstGenDebt;
+float[] notFirstGenDebt;
+float[] fDebt;
+float[] mDebt;
+float[] gradDebt;
+
+float[] gradWhit4;
+float[] gradBl4;
+float[] gradHisp4;
+float[] gradAsian4;
+float[] gradAmIn4;
+float[] gradHI4;
+float[] grad2More4;
+float[] gradAlien4;
+float[] gradUnk4;
+float[] gradWhitL4;
+float[] gradBlL4;
+float[] gradHispL4;
+float[] gradAsianL4;
+float[] gradAmInL4;
+float[] gradHIL4;
+float[] grad2MoreL4;
+float[] gradAlienL4;
+float[] gradUnkL4;
 
 float actualWidth = 125.50 - 66.50;
 float actualHeight = 46 - 26;
@@ -65,7 +109,7 @@ void setup()
   homeIcon = loadImage("pics/homeIcon.png", "png");
   statePic = loadImage("pics/states/Alabama.gif");
 
-  boolean fileExists = checkFileExists("testData2013.csv");
+  boolean fileExists = checkFileExists("MERGED2013_PP.csv");
   if (fileExists)
   {
     data13 = loadTable("data/MERGED2013_PP.csv", "csv");
@@ -95,7 +139,7 @@ void setup()
 
 void draw()
 {
-  background(255);
+  background(255,253,231);
   if (homeView)
     drawHomeView();
   else if (stateView)
@@ -113,6 +157,8 @@ void draw()
     //print("currAttr = ", currAttr, "\n");
     drawAttrButtons();
   }
+  else if (collegeView) drawCollegeView();
+  
   if(menuOpen)
     drawMenuView();
     
@@ -156,7 +202,7 @@ void drawToolbar()
   textAlign(CENTER, CENTER);
   textSize(35);
   if (menuOpen)
-    text("Menu", 600, 20);
+    text("History", 600, 20);
   else if (stateView)
   {
     text(stateNames[currentState]+" College Data", 600, 20);
@@ -164,6 +210,10 @@ void drawToolbar()
   }
   else if (homeView)
     text("College Data Home", 600, 20);
+  else if (collegeView) {
+    text(currColNames[currCollege], 600, 20);
+    nextPrevCol();
+  }
 }
 
 //========================== mouseOver() ===========================//
