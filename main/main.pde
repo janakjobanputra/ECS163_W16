@@ -10,23 +10,36 @@ String[] stateNames = {"Alabama", "Alaska", "Arizona", "Arkansas", "California",
 "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", 
 "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", 
 "Wisconsin", "Wyoming"};
-
 String[] stateAbrvs = {"AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", 
 "GA", "HI", "ID", "IL", "IN", "IO", "KS", "KY", "LA", "MA", "MD", "MA", "MI", 
 "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", 
 "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", 
 "WI", "WY"};
 
-boolean menuOpen=false;
 PImage mapPic, homeIcon;
+
+boolean menuOpen=false;
+
+
+boolean homeView=true;
+
+
+boolean stateView=false;
+int currentState=-1;
+
+
 Table data13;
-float[] latitude = new float[7805];
-float[] longitude = new float[7805];
-String[] name = new String[7805];
-float actualWidth = 124.50 - 67.50;
+int csvSize=500;
+float[] latitude = new float[csvSize];
+float[] longitude = new float[csvSize];
+String[] collegeName = new String[csvSize];
+String[] collegeCity = new String[csvSize];
+String[] stAbbr = new String[csvSize];
+
+float actualWidth = 125.50 - 66.50;
 float actualHeight = 46 - 26;
 float scaleFactorW = 900/actualWidth;
-float scaleFactorH = 550/actualHeight;
+float scaleFactorH = 600/actualHeight;
 
 //=========================== SETUP() ===========================//
 
@@ -35,19 +48,21 @@ void setup()
   size(1200, 700);
   frameRate(60);
   
-  mapPic = loadImage("pics/blankUSMap2.gif");
+  mapPic = loadImage("pics/blankUSMap3.png");
   homeIcon = loadImage("pics/homeIcon.png", "png");
   
-  boolean fileExists = checkFileExists("MERGED2013_PP.csv");
-  if(fileExists) {
+  boolean fileExists = checkFileExists("testData2013.csv");
+  if(fileExists)
+  {
     data13 = loadTable("data/MERGED2013_PP.csv", "csv");
-    for (int i = 1; i < 7805; i++) {
+    for (int i = 1; i<csvSize; i++)
+    {
       latitude[i-1] = data13.getFloat(i, 21);
       longitude[i-1] = data13.getFloat(i, 22);
-      name[i-1] = data13.getString(i, 3);
+      collegeName[i-1] = data13.getString(i, 3);
     }
   }
-  print(longitude[0], " ", latitude[0], "\n");
+  //print(longitude[0], " ", latitude[0], "\n");
 }
 
 //=========================== DRAW() ============================//
@@ -56,6 +71,12 @@ void draw()
 {
   background(255);
   drawToolbar();
+  if(homeView)
+    drawHomeView();
+  else if(stateView)
+    drawStateView();
+    
+  if(menuOpen);
 }
 
 //======================== drawToolbar() =========================//
@@ -63,7 +84,7 @@ void draw()
 void drawToolbar()
 {
   noStroke();
-  fill(0,31,100);
+  fill(21,101,192);
   rect(0,0,1200,50); // overall toolbar
   
   if(menuOpen) // menu button if menu open
@@ -84,47 +105,24 @@ void drawToolbar()
     rect(7.5,32.5,35,5,5);
   }
   //action for menu button
-  if(overRect(0,0,50,50)&&mousePressed)
+  if(mouseOver(0,0,50,50)&&mousePressed)
       menuOpen=!menuOpen;
   
   stroke(0);
   strokeWeight(2);
   noFill();
-  image(mapPic, 25, 75, 900, 550);
-  rect(25,75,900,600);
+  //image(mapPic, 25, 75, 900, 600);
+  //rect(25,75,900,600);
   noStroke();
   image(homeIcon,1200-50,0,50,50);
   
-  plotColleges();
- 
-  /*float scaledLat = (46.25 - latitude[346])*scaleFactorH;
-  float scaledLong = (124.25 + longitude[346])*scaleFactorW;
-  
-  print(latitude[346] + " scaledLat " + scaledLat + "\n");
-  print(longitude[346] + " scaledLong " + scaledLong + "\n");
-  
-  stroke(0);
-  strokeWeight(2);
-  noFill();
-  ellipse(scaledLong + 25, scaledLat + 75, 10, 10);
-  
-  float scaledLa = (46.25 - latitude[692])*scaleFactorH;
-  float scaledLon = (124.25 + longitude[692])*scaleFactorW;
-  
-  print(latitude[692] + " scaledLat " + scaledLa + "\n");
-  print(longitude[692] + " scaledLong " + scaledLon + "\n");
-  
-  stroke(0);
-  strokeWeight(2);
-  fill(255,0,0);
-  ellipse(scaledLon + 25, scaledLa + 75, 10, 10);
-  ellipse(800,165, 20,20);*/
+  //plotColleges();
   
 }
 
-//========================== overRect() ===========================//
+//========================== mouseOver() ===========================//
 
-boolean overRect(float buttonX, float buttonY, float buttonW, float buttonH)
+boolean mouseOver(float buttonX, float buttonY, float buttonW, float buttonH)
 {
   if (mouseX >= buttonX  && mouseX <= buttonX+buttonW &&
       mouseY >= buttonY  && mouseY <= buttonY+buttonH)
@@ -135,30 +133,13 @@ boolean overRect(float buttonX, float buttonY, float buttonW, float buttonH)
 
 //=======================CHECKFILEEXISTS()========================//
 
-boolean checkFileExists(String path) {
+boolean checkFileExists(String path)
+{
   File file = new File(dataPath(path));
   //print(file + "\n");
   if (file.exists()) 
     return true;
   else return false;
-}
-
-//======================= plotColleges() ========================//
-
-void plotColleges() {
- 
-  for(int i = 0; i < 400; i++) {
-  
-    float scaledLat = (46 - latitude[i])*scaleFactorH;
-    float scaledLong = (124.50 + longitude[i])*scaleFactorW;
-    
-    //print(latitude[i] + " scaledLat " + scaledLat + "\n");
-    //print(longitude[i] + " scaledLong " + scaledLong + "\n");
-    
-    noStroke();
-    fill(255,0,0);
-    ellipse(scaledLong + 25, scaledLat + 75, 10, 10);
-  }
 }
 
 //===============================================================//
