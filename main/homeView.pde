@@ -27,6 +27,11 @@ void drawHomeView()
         textAlign(CENTER, CENTER);
         textSize(12);
         text(stateNames[num], tempX+50, tempY+75);
+        noStroke();
+        fill(255);
+        textAlign(LEFT, CENTER);
+        textSize(15);
+        text(stateCollegeNum[num], tempX+3, tempY+10);
         if(mousePressed)
         {
           currentState=num;
@@ -43,12 +48,17 @@ void drawHomeView()
         fill(255);
         textAlign(CENTER, CENTER);
         textSize(32);
-        text(stateAbrvs[num], tempX+50, tempY+35);
+        text(stateAbrvs[num], tempX+50, tempY+40);
         noStroke();
         fill(255);
         textAlign(CENTER, CENTER);
         textSize(12);
-        text(stateNames[num], tempX+50, tempY+75);  
+        text(stateNames[num], tempX+50, tempY+80);
+        noStroke();
+        fill(255);
+        textAlign(LEFT, CENTER);
+        textSize(15);
+        text(stateCollegeNum[num], tempX+3, tempY+10);
       }
     }
   }
