@@ -14,6 +14,8 @@ String[] stateAbrvs = {"AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL",
   "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", 
   "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", 
   "WI", "WY"};
+int[] stateCollegeNum = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
 PImage mapPic, homeIcon, statePic;
 
@@ -130,9 +132,17 @@ void setup()
       satMath[i-1] = data13.getFloat(i, 44);
       satRead[i-1] = data13.getFloat(i, 43);
       satWrit[i-1] = data13.getFloat(i, 45);
-    }
-  }
-  //print(longitude[0], " ", latitude[0], "\n");
+      for(int j=0; j<50; j++)
+      {
+        if(   stAbbr[i-1].charAt(0) == stateAbrvs[j].charAt(0) 
+           && stAbbr[i-1].charAt(1) == stateAbrvs[j].charAt(1)  )
+        {
+          stateCollegeNum[j]++;
+        } // end if states match
+      } // end for j
+    } // end for i
+  } // end if file exists
+  //print(stateCollegeNum[0], " ", stateCollegeNum[1],  " ", stateCollegeNum[2],"\n");
 }
 
 //=========================== DRAW() ============================//
