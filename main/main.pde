@@ -20,12 +20,13 @@ PImage mapPic, homeIcon, statePic;
 boolean menuOpen=false;
 
 
-boolean homeView=true;
+boolean homeView=false;
 
 
-boolean stateView=false;
+boolean stateView=true;
 int currentState=0;
 BarChart barChart;
+int currAttr = 0;
 
 
 Table data13;
@@ -35,7 +36,16 @@ float[] longitude = new float[csvSize];
 String[] collegeName = new String[csvSize];
 String[] collegeCity = new String[csvSize];
 String[] stAbbr = new String[csvSize];
-float[]admRateAll= new float[csvSize];
+float[] admRateAll= new float[csvSize];
+float[] annCost = new float[csvSize];
+float[] fourYrCost = new float[csvSize];
+float[] actTot = new float[csvSize];
+float[] actMath = new float[csvSize];
+float[] actEng = new float[csvSize];
+float[] actWrit = new float[csvSize];
+float[] satMath = new float[csvSize];
+float[] satRead = new float[csvSize];
+float[] satWrit = new float[csvSize];
 
 float actualWidth = 125.50 - 66.50;
 float actualHeight = 46 - 26;
@@ -67,6 +77,15 @@ void setup()
       latitude[i-1] = data13.getFloat(i, 21);
       longitude[i-1] = data13.getFloat(i, 22);
       admRateAll[i-1] = data13.getFloat(i, 37);
+      annCost[i-1] = data13.getFloat(i, 376);
+      fourYrCost[i-1] = data13.getFloat(i, 377);
+      actTot[i-1] = data13.getFloat(i, 54);
+      actMath[i-1] = data13.getFloat(i, 56);
+      actEng[i-1] = data13.getFloat(i, 55);
+      actWrit[i-1] = data13.getFloat(i, 57);
+      satMath[i-1] = data13.getFloat(i, 44);
+      satRead[i-1] = data13.getFloat(i, 43);
+      satWrit[i-1] = data13.getFloat(i, 45);
     }
   }
   //print(longitude[0], " ", latitude[0], "\n");
@@ -77,17 +96,24 @@ void setup()
 void draw()
 {
   background(255);
+  drawToolbar();
   if(homeView)
     drawHomeView();
-  else if(stateView)
-    drawStateView();
-    
-    
-  if(menuOpen)
-    drawMenuView();
-    
-  drawToolbar();
-  print(currentState, "\n");
+  else if(stateView) {
+    if (currAttr == 0) drawStateView(admRateAll, 0, 1);
+    else if (currAttr == 1) drawStateView(annCost, 0, 100000);
+    else if (currAttr == 2) drawStateView(fourYrCost, 0, 400000);
+    else if (currAttr == 3) drawStateView(actTot, 0, 32);
+    else if (currAttr == 4) drawStateView(actMath, 0, 32);
+    else if (currAttr == 5) drawStateView(actEng, 0, 32);
+    else if (currAttr == 6) drawStateView(actWrit, 0, 32);
+    else if (currAttr == 7) drawStateView(satMath, 0, 800);
+    else if (currAttr == 8) drawStateView(satRead, 0, 800);
+    else if (currAttr == 9) drawStateView(satWrit, 0, 800);
+    //print("currAttr = ", currAttr, "\n");
+    drawAttrButtons();
+  }
+  if(menuOpen);
 }
 
 //======================== drawToolbar() =========================//
@@ -98,11 +124,24 @@ void drawToolbar()
   fill(21,101,192);
   rect(0,0,1200,50); // overall toolbar
   
-  noStroke();
-  fill(255);
-  rect(7.5,12.5,35,5,5);
-  rect(7.5,22.5,35,5,5);
-  rect(7.5,32.5,35,5,5);
+  if(menuOpen) // menu button if menu open
+  {
+    strokeWeight(2);
+    stroke(255);
+    fill(0);
+    rect(7.5,12.5,35,5,5);
+    rect(7.5,22.5,35,5,5);
+    rect(7.5,32.5,35,5,5);
+  }
+  else // menu button if menu NOT open
+  {
+    noStroke();
+    fill(255);
+    rect(7.5,12.5,35,5,5);
+    rect(7.5,22.5,35,5,5);
+    rect(7.5,32.5,35,5,5);
+  }
+  //action for menu button
   if(mouseOver(0,0,50,50)&&mousePressed)
       menuOpen=!menuOpen;
   
@@ -118,22 +157,10 @@ void drawToolbar()
     menuOpen=false;
     homeView=true;
     stateView=false;
-  } // if home icon pressued
-  
-  noStroke();
-  fill(255);
-  textFont(createFont("Serif",35),35);
-  textAlign(CENTER, CENTER);
-  textSize(35);
-  if(menuOpen)
-    text("Menu", 600, 20);
-  else if(stateView)
-  {
-    text(stateNames[currentState]+" College Data", 600, 20);
-    nextPrevState();
   }
-  else if(homeView)
-    text("College Data Home", 600, 20);
+    
+  
+  //plotColleges();
   
 }
 
