@@ -1,10 +1,9 @@
 //=========================== drawStates() ======================//
 
 void drawHomeView()
-{
-  //INSERT TITLE IN TOOLBAR
+{ 
   int squareSize=100;
-  float horizOffset=32.5, vertOffset=125;
+  float horizOffset=32.5, vertOffset=115;
   for(int i=0; i<5; i++)
   {
     for(int j=0; j<10; j++)
@@ -15,7 +14,7 @@ void drawHomeView()
       if(mouseOver(tempX, tempY,squareSize, squareSize))
       {
         noStroke();
-        fill(0,105,92);
+        fill(0,105,92); // green
         rect( tempX,tempY,squareSize,squareSize );
         noStroke();
         fill(255);
@@ -37,7 +36,7 @@ void drawHomeView()
       else
       {
         noStroke();
-        fill(21,101,192);
+        fill(240,98,146); // pink
         rect( tempX,tempY,squareSize,squareSize );
         noStroke();
         fill(255);

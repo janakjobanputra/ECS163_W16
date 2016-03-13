@@ -25,10 +25,10 @@ void drawStateView()
       j++;
     }
   }
-  print(stAbbr[0].charAt(0) + " " + stateAbrvs[currentState].charAt(0) + "\n");
+  //print(stAbbr[0].charAt(0) + " " + stateAbrvs[currentState].charAt(0) + "\n");
   //print(stAbbr[0]==stateAbrvs[currentState], "\n");
-  print(stateData[0], " ", admRateAll[0], "\n");
-  print(names[0], " ", collegeName[0], "\n");
+  //print(stateData[0], " ", admRateAll[0], "\n");
+  //print(names[0], " ", collegeName[0], "\n");
   float[] dat = subset(stateData, 1, j-1);
   String[] nam = subset(names, 1, j-1);
   
