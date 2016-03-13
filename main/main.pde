@@ -19,10 +19,10 @@ PImage mapPic, homeIcon, statePic;
 boolean menuOpen=false;
 
 
-boolean homeView=false;
+boolean homeView=true;
 
 
-boolean stateView=true;
+boolean stateView=false;
 int currentState=0;
 BarChart barChart;
 
@@ -76,13 +76,17 @@ void setup()
 void draw()
 {
   background(255);
-  drawToolbar();
   if(homeView)
     drawHomeView();
   else if(stateView)
     drawStateView();
     
-  if(menuOpen);
+    
+  if(menuOpen)
+    drawMenuView();
+    
+  drawToolbar();
+  print(currentState, "\n");
 }
 
 //======================== drawToolbar() =========================//
@@ -93,24 +97,11 @@ void drawToolbar()
   fill(21,101,192);
   rect(0,0,1200,50); // overall toolbar
   
-  if(menuOpen) // menu button if menu open
-  {
-    strokeWeight(2);
-    stroke(255);
-    fill(0);
-    rect(7.5,12.5,35,5,5);
-    rect(7.5,22.5,35,5,5);
-    rect(7.5,32.5,35,5,5);
-  }
-  else // menu button if menu NOT open
-  {
-    noStroke();
-    fill(255);
-    rect(7.5,12.5,35,5,5);
-    rect(7.5,22.5,35,5,5);
-    rect(7.5,32.5,35,5,5);
-  }
-  //action for menu button
+  noStroke();
+  fill(255);
+  rect(7.5,12.5,35,5,5);
+  rect(7.5,22.5,35,5,5);
+  rect(7.5,32.5,35,5,5);
   if(mouseOver(0,0,50,50)&&mousePressed)
       menuOpen=!menuOpen;
   
@@ -126,10 +117,22 @@ void drawToolbar()
     menuOpen=false;
     homeView=true;
     stateView=false;
-  }
-    
+  } // if home icon pressued
   
-  //plotColleges();
+  noStroke();
+  fill(255);
+  textFont(createFont("Serif",35),35);
+  textAlign(CENTER, CENTER);
+  textSize(35);
+  if(menuOpen)
+    text("Menu", 600, 20);
+  else if(stateView)
+  {
+    text(stateNames[currentState]+" College Data", 600, 20);
+    nextPrevState();
+  }
+  else if(homeView)
+    text("College Data Home", 600, 20);
   
 }
 
