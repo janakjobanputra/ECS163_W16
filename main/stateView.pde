@@ -2,7 +2,6 @@
 
 void drawStateView(float[] data, int min, int max)
 {
-  //INSERT TITLE IN TOOLBAR
   //print("State Selected: "+stateNames[currentState]+"\n");
   statePic = loadImage("pics/states/"+stateNames[currentState]+".gif");
   image(statePic, 25, 75, 465, 600);
