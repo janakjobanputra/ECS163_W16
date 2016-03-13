@@ -2,6 +2,7 @@
 
 void drawHomeView()
 {
+  //INSERT TITLE IN TOOLBAR
   int squareSize=100;
   float horizOffset=32.5, vertOffset=125;
   for(int i=0; i<5; i++)
