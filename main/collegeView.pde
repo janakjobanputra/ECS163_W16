@@ -4,7 +4,10 @@ float[] angles2 = new float[3];
 
 //======================= drawCollegeView() =======================//
 
-void drawCollegeView() {
+void drawCollegeView()
+{
+  stateView=false;
+  homeView=false;
   
   angles[0] = currColWhit[currCollege]*360;
   angles[1] = currColBl[currCollege]*360;
@@ -199,57 +202,57 @@ void collegeStats() {
   else text("No Data Provided", 960, 300);
   
   if(gradWhit4[currCollege] == gradWhit4[currCollege])
-    text(gradWhit4[currCollege] + " % (4 - Year College)", 960, 320);
+    text(gradWhit4[currCollege]*100 + " % (4 - Year College)", 960, 320);
   else if(gradWhitL4[currCollege] == gradWhitL4[currCollege])
-    text(gradWhitL4[currCollege] + " % (Less than 4 Years)", 960, 320);
+    text(gradWhitL4[currCollege]*100 + " % (Less than 4 Years)", 960, 320);
   else text("No Data Provided", 960, 320);
     
   if(gradBl4[currCollege] == gradBl4[currCollege])
-    text(gradBl4[currCollege] + " % (4 - Year College)", 960, 340);
+    text(gradBl4[currCollege]*100 + " % (4 - Year College)", 960, 340);
   else if(gradBlL4[currCollege] == gradBlL4[currCollege])
-    text(gradBlL4[currCollege] + " % (Less than 4 Years)", 960, 340);
+    text(gradBlL4[currCollege]*100 + " % (Less than 4 Years)", 960, 340);
   else text("No Data Provided", 960, 340);
     
   if(gradHisp4[currCollege] == gradHisp4[currCollege])
-    text(gradHisp4[currCollege] + " % (4 - Year College)", 960, 360);
+    text(gradHisp4[currCollege]*100 + " % (4 - Year College)", 960, 360);
   else if(gradHispL4[currCollege] == gradHispL4[currCollege])
-    text(gradHispL4[currCollege] + " % (Less than 4 Years)", 960, 360);
+    text(gradHispL4[currCollege]*100 + " % (Less than 4 Years)", 960, 360);
   else text("No Data Provided", 960, 360);
     
   if(gradAsian4[currCollege] == gradAsian4[currCollege])
-    text(gradAsian4[currCollege] + " % (4 - Year College)", 960, 400);
+    text(gradAsian4[currCollege]*100 + " % (4 - Year College)", 960, 400);
   else if(gradAsianL4[currCollege] == gradAsianL4[currCollege])
-    text(gradAsianL4[currCollege] + " % (Less than 4 Years)", 960, 400);
+    text(gradAsianL4[currCollege]*100 + " % (Less than 4 Years)", 960, 400);
   else text("No Data Provided", 960, 400);
     
   if(gradAmIn4[currCollege] == gradAmIn4[currCollege])
-    text(gradAmIn4[currCollege] + " % (4 - Year College)", 960, 440);
+    text(gradAmIn4[currCollege]*100 + " % (4 - Year College)", 960, 440);
   else if(gradAmInL4[currCollege] == gradAmInL4[currCollege])
-    text(gradAmInL4[currCollege] + " % (Less than 4 Years)", 960, 440);
+    text(gradAmInL4[currCollege]*100 + " % (Less than 4 Years)", 960, 440);
   else text("No Data Provided", 960, 440);
     
   if(gradHI4[currCollege] == gradHI4[currCollege])
-    text(gradHI4[currCollege] + " % (4 - Year College)", 960, 480);
+    text(gradHI4[currCollege]*100 + " % (4 - Year College)", 960, 480);
   else if(gradHIL4[currCollege] == gradHIL4[currCollege])
-    text(gradHIL4[currCollege] + " % (Less than 4 Years)", 960, 480);
+    text(gradHIL4[currCollege]*100 + " % (Less than 4 Years)", 960, 480);
   else text("No Data Provided", 960, 480);
     
   if(grad2More4[currCollege] == grad2More4[currCollege])
-    text(grad2More4[currCollege] + " % (4 - Year College)", 960, 520);
+    text(grad2More4[currCollege]*100 + " % (4 - Year College)", 960, 520);
   else if(grad2MoreL4[currCollege] == grad2MoreL4[currCollege])
-    text(grad2MoreL4[currCollege] + " % (Less than 4 Years)", 960, 520);
+    text(grad2MoreL4[currCollege]*100 + " % (Less than 4 Years)", 960, 520);
   else text("No Data Provided", 960, 520);
     
   if(gradAlien4[currCollege] == gradAlien4[currCollege])
-    text(gradAlien4[currCollege] + " % (4 - Year College)", 960, 560);
+    text(gradAlien4[currCollege]*100 + " % (4 - Year College)", 960, 560);
   else if(gradAlienL4[currCollege] == gradAlienL4[currCollege])
-    text(gradAlienL4[currCollege] + " % (Less than 4 Years)", 960, 560);
+    text(gradAlienL4[currCollege]*100 + " % (Less than 4 Years)", 960, 560);
   else text("No Data Provided", 960, 560);
     
   if(gradUnk4[currCollege] == gradUnk4[currCollege])
-    text(gradUnk4[currCollege] + " % (4 - Year College)", 960, 580);
+    text(gradUnk4[currCollege]*100 + " % (4 - Year College)", 960, 580);
   else if(gradUnkL4[currCollege] == gradUnkL4[currCollege])
-    text(gradUnkL4[currCollege] + " % (Less than 4 Years)", 960, 580);
+    text(gradUnkL4[currCollege]*100 + " % (Less than 4 Years)", 960, 580);
   else text("No Data Provided", 960, 580);
   
   if(actMath[currCollege] == actMath[currCollege]

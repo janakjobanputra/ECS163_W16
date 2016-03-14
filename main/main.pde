@@ -16,6 +16,7 @@ String[] stateAbrvs = {"AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL",
   "WI", "WY"};
 int[] stateCollegeNum = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+String[] history = {"Home: USA Colleges","","","",""};
 
 PImage mapPic, homeIcon, statePic;
 
@@ -212,7 +213,7 @@ void drawToolbar()
   textAlign(CENTER, CENTER);
   textSize(35);
   if (menuOpen)
-    text("History", 600, 20);
+    text("Menu", 600, 20);
   else if (stateView)
   {
     text(stateNames[currentState]+" College Data", 600, 20);
@@ -246,6 +247,17 @@ boolean checkFileExists(String path)
   if (file.exists()) 
     return true;
   else return false;
+}
+
+//=======================ADD2HISTORY()========================//
+
+void add2History(String add)
+{
+  history[4] = history[3];
+  history[3] = history[2];
+  history[2] = history[1];
+  history[1] = history[0];
+  history[0] = add;
 }
 
 //===============================================================//
