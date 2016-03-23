@@ -3,6 +3,9 @@
 
 void drawHomeView()
 { 
+  stateView=false;
+  collegeView = false;
+  
   int squareSize=100;
   float horizOffset=32.5, vertOffset=115;
   for(int i=0; i<5; i++)
@@ -39,7 +42,7 @@ void drawHomeView()
           stateView=true;
         }
       }
-      else
+         else
       {
         noStroke();
         fill(240,98,146); // pink
@@ -63,6 +66,7 @@ void drawHomeView()
     }
   }
   
+
 }
 
 //===============================================================//

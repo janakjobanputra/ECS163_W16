@@ -1,6 +1,5 @@
 //======================= drawMenuView() ========================//
 
-
 void drawMenuView()
 {
 //----------------------menu rect
@@ -59,19 +58,20 @@ void drawMenuView()
 //----------------------collegeview bar
   noStroke();
   fill(13,71,161);
+  rect(0,55+60,300,30);
   if(collegeView)
   {
     fill(21,101,192);
     stroke(255);
     strokeWeight(2);
+    rect(0,55+60,300,30);
+    noStroke();
+    fill(255);
+    textFont(createFont("Serif",12),12);
+    textAlign(LEFT, CENTER);
+    textSize(12);
+    text(currColNames[currCollege], 10, 55+60+15);
   }
-  rect(0,55+60,300,30);
-  noStroke();
-  fill(255);
-  textFont(createFont("Serif",18),18);
-  textAlign(LEFT, CENTER);
-  textSize(10);
-  text(currColNames[currCollege], 10, 55+60+15);
   if(mouseOver(0,55+60,300,30)&&mousePressed)
   {
     menuOpen=false;
